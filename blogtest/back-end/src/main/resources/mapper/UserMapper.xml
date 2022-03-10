@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backend.mapper.UserMapper">
+
+    <insert id="insertUser" parameterType="com.example.backend.bean.UserVO">
+        INSERT INTO tbl_user(user_id, user_pw, user_name,user_birthdate, user_gender, user_phone, user_email, user_addr1, user_addr2,user_category)
+        VALUES (#{user_id}, #{user_pw}, #{user_name},#{user_birthdate}, #{user_gender}, #{user_phone}, #{user_email}, #{user_addr1},#{user_addr2}, #{user_category})
+    </insert>
+
+    <select id="userList" resultType="com.example.backend.bean.UserVO">
+        SELECT *
+        FROM tbl_user
+        ORDER BY user_id
+    </select>
+
+    <select id="fetchUserByID" resultType="com.example.backend.bean.UserVO"
+            parameterType="String">
+        SELECT *
+        FROM tbl_user
+        WHERE user_id = #{user_id}
+    </select>
+
+    <delete id="deleteUser" parameterType="String">
+        DELETE
+        FROM tbl_user
+        WHERE user_id = #{user_id}
+    </delete>
+
+    <update id="updateUser" parameterType="com.example.backend.bean.UserVO">
+        UPDATE tbl_user
+        SET user_pw    = #{user_pw},
+            user_name  = #{user_name},
+            user_addr1 = #{user_addr1},
+            user_addr2 = #{user_addr2}
+        WHERE user_id = #{user_id}
+    </update>
+
+</mapper>
